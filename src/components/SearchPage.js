@@ -6,9 +6,8 @@ import Book from './Book';
 class SearchPage extends Component {
 
     static propTypes = {
-        // todo: pass current books and update function
-        // onUpdateBook: PropTypes.func.isRequired,
-        // currentBooks: PropTypes.array.isRequired
+        onUpdateBook: PropTypes.func.isRequired,
+        currentBooks: PropTypes.array.isRequired
     }
 
     constructor() {
@@ -20,15 +19,7 @@ class SearchPage extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.onUpdateBook = this.onUpdateBook.bind(this);
-    }
 
-    componentDidMount() {
-
-    }
-
-    onUpdateBook(e) {
-        console.log('onUpdateBook', e);
     }
 
     // todo: implement debounce to avoid search while typing
@@ -68,7 +59,7 @@ class SearchPage extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {this.state.results.map(book => (
-                            <Book key={book.id} book={book} onUpdateBook={this.onUpdateBook}></Book>
+                            <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
 
                         ))}
                     </ol>

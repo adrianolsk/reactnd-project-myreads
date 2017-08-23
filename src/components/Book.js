@@ -10,28 +10,31 @@ class Book extends Component {
 
     constructor() {
         super();
-        this.state = {
-            status: ''
-        }
 
+        this.state = {
+            shelf: ''
+        };
         this.onUpdateBook = this.onUpdateBook.bind(this);
     }
 
     componentDidMount() {
+
         this.setState({
-            status: this.props.book.status || ''
-        })
+            shelf: this.props.book.shelf || ''
+        });
+        console.log('Book componentDidMount');
     }
 
     onUpdateBook(e) {
         this.setState({
-            status: e.target.value
+            shelf: e.target.value
         });
-        this.props.onUpdateBook(this.props.book, this.state.status);
+        this.props.onUpdateBook(this.props.book, e.target.value);
     }
 
     render() {
 
+        const {shelf} = this.state;
         const {
             title,
             authors,
@@ -48,8 +51,8 @@ class Book extends Component {
                             height: 192,
                             backgroundImage: `url(${imageLinks.thumbnail})`
                         }}/>
-                        <div className="book-shelf-changer" onChange={this.onUpdateBook}>
-                            <select value={this.state.status}>
+                        <div className="book-shelf-changer">
+                            <select value={shelf} onChange={this.onUpdateBook}>
                                 <option value="" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

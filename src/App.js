@@ -7,23 +7,45 @@ import MyReadsPage from './components/MyReadsPage'
 
 class BooksApp extends React.Component {
     state = {
-        /**
-         * TODO: Instead of using this state variable to keep track of which page
-         * we're on, use the URL in the browser's address bar. This will ensure that
-         * users can use the browser's back and forward buttons to navigate between
-         * pages, as well as provide a good URL they can bookmark and share.
-         */
-        // showSearchPage: true
+        books: []
+    }
+
+    constructor() {
+        super();
+        this.onUpdateBook = this.onUpdateBook.bind(this);
+    }
+
+    componentDidMount() {
+        BooksAPI.getAll().then((books) => {
+            this.setState({
+                books
+            });
+        })
+    }
+
+    onUpdateBook(book, shelf) {
+        book.shelf = shelf;
+
+        // todo: implement optimistic UI, set the state first, save and update state if fail
+        BooksAPI.update(book, shelf)
+            .then(response => {
+                this.setState(prev => ({
+                    books: prev.books.filter((b) => b.id !== book.id).concat([book])
+                }))
+            });
+
     }
 
     render() {
+        const {books} = this.state;
+
         return (
             <div className="app">
                 <Route exact path="/" render={() => (
-                    <MyReadsPage></MyReadsPage>
+                    <MyReadsPage books={books} onUpdateBook={this.onUpdateBook}></MyReadsPage>
                 )}/>
                 <Route path="/search" render={() => (
-                    <SearchPage></SearchPage>
+                    <SearchPage currentBooks={books} onUpdateBook={this.onUpdateBook}></SearchPage>
                 )}/>
             </div>
         );
