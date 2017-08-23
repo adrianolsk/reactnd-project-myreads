@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types'
-
+import Book from './Book';
 class SearchPage extends Component {
 
     static propTypes = {
@@ -20,10 +20,15 @@ class SearchPage extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.onUpdateBook = this.onUpdateBook.bind(this);
     }
 
     componentDidMount() {
 
+    }
+
+    onUpdateBook(e) {
+        console.log('onUpdateBook', e);
     }
 
     // todo: implement debounce to avoid search while typing
@@ -63,15 +68,8 @@ class SearchPage extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {this.state.results.map(book => (
-                            <div key={book.id} style={{
-                                border: 'solid 1px #ccc',
-                                padding: '10px',
-                                margin: '10px',
-                                width: '200px',
-                                height: '200px'
-                            }}>
-                                {book.title}
-                            </div>
+                            <Book key={book.id} book={book} onUpdateBook={this.onUpdateBook}></Book>
+
                         ))}
                     </ol>
                 </div>
