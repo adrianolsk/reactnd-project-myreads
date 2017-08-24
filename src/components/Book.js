@@ -40,7 +40,9 @@ class Book extends Component {
         const {
             title,
             authors,
-            imageLinks
+            imageLinks,
+            averageRating = 0,
+            ratingsCount = 0
         } = this.props.book;
 
         return (
@@ -65,6 +67,12 @@ class Book extends Component {
                     </div>
                     <div className="book-title">{title}</div>
                     <div className="book-authors">{authors}</div>
+                    <div className="book-rating">
+                        {ratingsCount > 0 ? (
+                            <p>{averageRating}/5 ({ratingsCount} votes)</p>
+                        ) : 'No ratings'}
+
+                    </div>
                 </div>
             </li>
         );
