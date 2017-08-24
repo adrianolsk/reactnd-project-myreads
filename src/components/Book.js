@@ -32,6 +32,8 @@ class Book extends Component {
         this.props.onUpdateBook(this.props.book, e.target.value);
     }
 
+
+
     render() {
 
         const {shelf} = this.state;

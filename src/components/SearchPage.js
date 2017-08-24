@@ -7,6 +7,7 @@ class SearchPage extends Component {
 
     static propTypes = {
         onUpdateBook: PropTypes.func.isRequired,
+        onError: PropTypes.func.isRequired,
         currentBooks: PropTypes.array.isRequired
     }
 
@@ -16,7 +17,7 @@ class SearchPage extends Component {
         this.state = {
             query: '',
             results: []
-        }
+        };
 
         this.handleChange = this.handleChange.bind(this);
 
@@ -33,6 +34,7 @@ class SearchPage extends Component {
         if (this.state.query.length > 0) {
             BooksAPI.search(this.state.query, 20)
                 .then(response => {
+
                     let results = response === undefined || response.error || response.length === 0 ? [] : response;
                     results.map((book) => {
 
@@ -47,6 +49,9 @@ class SearchPage extends Component {
                     this.setState({
                         results: results
                     })
+                })
+                .catch(err => {
+                    this.props.onError("Ops! Something went wrong with your search.");
                 });
         }
 
