@@ -34,8 +34,14 @@ class SearchPage extends Component {
             BooksAPI.search(this.state.query, 20)
                 .then(response => {
                     let results = response === undefined || response.error || response.length === 0 ? [] : response;
-                    results.map(book => {
-                        // todo: check if the book is already in a shelf
+                    results.map((book) => {
+
+                        for (let currentBook of this.props.currentBooks) {
+                            if (currentBook.id == book.id) {
+                                book.shelf = currentBook.shelf;
+                                break;
+                            }
+                        }
                     });
 
                     this.setState({
