@@ -30,7 +30,7 @@ class MyReadsPage extends Component {
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {currentlyReadingBooks.length == 0 ? (<p>No books...</p>) : ''}
+                                    {currentlyReadingBooks.length == 0 ? (<p>You are no reading any book</p>) : ''}
 
                                     {currentlyReadingBooks.map(book => (
                                         <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
@@ -42,7 +42,7 @@ class MyReadsPage extends Component {
                             <h2 className="bookshelf-title">Want to Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {wantToReadBooks.length == 0 ? (<p>No books...</p>) : ''}
+                                    {wantToReadBooks.length == 0 ? (<p>You have no books in mind</p>) : ''}
 
                                     {wantToReadBooks.map(book => (
                                         <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
@@ -54,7 +54,7 @@ class MyReadsPage extends Component {
                             <h2 className="bookshelf-title">Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {readBooks.length == 0 ? (<p>No books...</p>) : ''}
+                                    {readBooks.length == 0 ? (<p>You have't read a single book :(</p>) : ''}
 
                                     {readBooks.map(book => (
                                         <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
