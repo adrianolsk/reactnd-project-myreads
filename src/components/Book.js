@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Panel from 'muicss/lib/react/panel';
+import Dropdown from 'muicss/lib/react/dropdown';
+import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 class Book extends Component {
 
@@ -47,33 +50,37 @@ class Book extends Component {
 
         return (
             <li>
-                <div className="book">
-                    <div className="book-top">
+                <Panel>
+                    <div className="book">
+                        <div className="book-top">
 
-                        <div className="book-cover" style={{
-                            width: 128,
-                            height: 192,
-                            backgroundImage: `url(${imageLinks.thumbnail})`
-                        }}/>
-                        <div className="book-shelf-changer">
-                            <select value={shelf} onChange={this.onUpdateBook}>
-                                <option value="" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                            </select>
+                            <div className="book-cover" style={{
+                                width: 128,
+                                height: 192,
+                                backgroundImage: `url(${imageLinks.thumbnail})`
+                            }}/>
+                            <div className="book-shelf-changer">
+
+                                <select value={shelf} onChange={this.onUpdateBook}>
+                                    <option value="" disabled>Move to...</option>
+                                    <option value="currentlyReading">Currently Reading</option>
+                                    <option value="wantToRead">Want to Read</option>
+                                    <option value="read">Read</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="book-title">{title}</div>
+                        <div className="book-authors">{authors}</div>
+                        <div className="book-rating">
+                            {ratingsCount > 0 ? (
+                                <p>{averageRating}/5 ({ratingsCount} votes)</p>
+                            ) : 'No ratings'}
+
                         </div>
                     </div>
-                    <div className="book-title">{title}</div>
-                    <div className="book-authors">{authors}</div>
-                    <div className="book-rating">
-                        {ratingsCount > 0 ? (
-                            <p>{averageRating}/5 ({ratingsCount} votes)</p>
-                        ) : 'No ratings'}
+                </Panel>
 
-                    </div>
-                </div>
             </li>
         );
     }

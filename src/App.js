@@ -5,6 +5,9 @@ import './App.css'
 import SearchPage from './components/SearchPage'
 import MyReadsPage from './components/MyReadsPage'
 
+import { Appbar, Button, Container } from 'muicss/react';
+
+
 class BooksApp extends React.Component {
     state = {
         books: [],
@@ -90,22 +93,27 @@ class BooksApp extends React.Component {
 
         return (
             <div className="app">
-                <Route exact path="/" render={() => (
-                    <MyReadsPage books={books} onUpdateBook={this.onUpdateBook}/>
-                )}/>
-                <Route path="/search" render={() => (
-                    <SearchPage currentBooks={books}
-                                onUpdateBook={this.onUpdateBook}
-                                onError={this.onError}
-                    />
-                )}/>
-                {this.state.message.type ? (
-                    <div className={`message ${this.state.message.type}`}
-                         style={{display: this.state.message.show ? 'block' : 'none'}}>
-                        <p>{this.state.message.text}</p>
-                    </div>
-                ): ''}
+                <Appbar>
+                    <span>MyReads App</span>
+                </Appbar>
+                <Container>
+                    <Route exact path="/" render={() => (
+                        <MyReadsPage books={books} onUpdateBook={this.onUpdateBook}/>
+                    )}/>
+                    <Route path="/search" render={() => (
+                        <SearchPage currentBooks={books}
+                                    onUpdateBook={this.onUpdateBook}
+                                    onError={this.onError}
+                        />
+                    )}/>
+                    {this.state.message.type ? (
+                        <div className={`message ${this.state.message.type}`}
+                             style={{display: this.state.message.show ? 'block' : 'none'}}>
+                            <p>{this.state.message.text}</p>
+                        </div>
+                    ): ''}
 
+                </Container>
             </div>
         );
     }
