@@ -44,8 +44,7 @@ class MyReadsPage extends Component {
         this.changeShelvesStyle = this.changeShelvesStyle.bind(this);
     }
 
-    changeShelvesStyle(e) {
-        console.log('clicked', e);
+    changeShelvesStyle() {
         this.setState((prev) => ({
             kambanStyle: !prev.kambanStyle,
             shelves: prev.shelves.sort(sortBy(prev.kambanStyle ? 'order' : 'kanbanOrder'))
@@ -58,22 +57,18 @@ class MyReadsPage extends Component {
         return (
             <div className="list-books">
                 <div className="list-books-title">
-                    <h1>MyReads {JSON.stringify(this.state.kambanStyle, null, 2)}</h1>
+                    <h1>MyReads</h1>
                     <button className="btn-shelf-style" onClick={this.changeShelvesStyle}>Change shelf style</button>
                 </div>
                 <div className={this.state.kambanStyle ? 'list-books-content kanban' : 'list-books-content'}>
-
                     {this.state.shelves.map(item => (
                         <Bookshelf
-
                             key={item.shelf}
                             books={books.filter((book) => book.shelf === item.shelf)}
                             title={item.title}
                             placeholder={item.placeholder}
                             onUpdateBook={this.props.onUpdateBook}/>
                     ))}
-
-
                 </div>
                 <div className="open-search">
                     <Link to="/search">Add a book</Link>

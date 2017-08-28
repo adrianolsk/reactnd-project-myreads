@@ -22,7 +22,6 @@ class Book extends Component {
         this.setState({
             shelf: this.props.book.shelf || ''
         });
-        console.log('Book componentDidMount');
     }
 
     onUpdateBook(shelf) {

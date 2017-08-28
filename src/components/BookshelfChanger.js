@@ -62,7 +62,6 @@ class BookShelfChanger extends Component {
                     </div>
                 )}
 
-
             </button>
         );
     }

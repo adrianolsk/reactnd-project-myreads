@@ -21,7 +21,6 @@ class SearchPage extends Component {
             results: []
         };
 
-
         this.searchBook = debounce(500, this.searchBook);
         this.handleChange = this.handleChange.bind(this);
 
