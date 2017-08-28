@@ -39,7 +39,7 @@ class SearchPage extends Component {
                     results.map((book) => {
 
                         for (let currentBook of this.props.currentBooks) {
-                            if (currentBook.id == book.id) {
+                            if (currentBook.id === book.id) {
                                 book.shelf = currentBook.shelf;
                                 break;
                             }
