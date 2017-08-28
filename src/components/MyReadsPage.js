@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Bookshelf from './Bookshelf'
+import sortBy from 'sort-by'
+
 class MyReadsPage extends Component {
 
     static propTypes = {
@@ -9,37 +11,68 @@ class MyReadsPage extends Component {
         onUpdateBook: PropTypes.func.isRequired
     }
 
-    render() {
+    constructor() {
+        super();
 
+        this.state = {
+            kambanStyle: false,
+            shelves: [
+                {
+                    title: 'Currently Reading',
+                    placeholder: 'You are not reading any book',
+                    shelf: 'currentlyReading',
+                    order: 1,
+                    kanbanOrder: 2
+                },
+                {
+                    title: 'Want to Read',
+                    placeholder: 'You have no books in mind',
+                    shelf: 'wantToRead',
+                    order: 2,
+                    kanbanOrder: 1
+                },
+                {
+                    title: 'Read',
+                    placeholder: 'You have\'t read a single book? :(',
+                    shelf: 'read',
+                    order: 3,
+                    kanbanOrder: 3
+                }
+            ]
+        }
+
+        this.changeShelvesStyle = this.changeShelvesStyle.bind(this);
+    }
+
+    changeShelvesStyle(e) {
+        console.log('clicked', e);
+        this.setState((prev) => ({
+            kambanStyle: !prev.kambanStyle,
+            shelves: prev.shelves.sort(sortBy(prev.kambanStyle ? 'order' : 'kanbanOrder'))
+        }));
+    }
+
+    render() {
         const {books} = this.props;
-        const wantToReadBooks = books.filter((book) => book.shelf === "wantToRead");
-        const currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading");
-        const readBooks = books.filter((book) => book.shelf === "read");
 
         return (
             <div className="list-books">
                 <div className="list-books-title">
-                    <h1>MyReads</h1>
+                    <h1>MyReads {JSON.stringify(this.state.kambanStyle, null, 2)}</h1>
+                    <button className="btn-shelf-style" onClick={this.changeShelvesStyle}>Change shelf style</button>
                 </div>
-                <div className="list-books-content">
+                <div className={this.state.kambanStyle ? 'list-books-content kanban' : 'list-books-content'}>
 
-                    <Bookshelf
-                        books={currentlyReadingBooks}
-                        title={'Currently Reading'}
-                        placeholder={'You are no reading any book'}
-                        onUpdateBook={this.props.onUpdateBook}/>
+                    {this.state.shelves.map(item => (
+                        <Bookshelf
 
-                    <Bookshelf
-                        books={wantToReadBooks}
-                        title={'Want to Read'}
-                        placeholder={'You have no books in mind'}
-                        onUpdateBook={this.props.onUpdateBook}/>
+                            key={item.shelf}
+                            books={books.filter((book) => book.shelf === item.shelf)}
+                            title={item.title}
+                            placeholder={item.placeholder}
+                            onUpdateBook={this.props.onUpdateBook}/>
+                    ))}
 
-                    <Bookshelf
-                        books={readBooks}
-                        title={'Read'}
-                        placeholder={'You have\'t read a single book :('}
-                        onUpdateBook={this.props.onUpdateBook}/>
 
                 </div>
                 <div className="open-search">
