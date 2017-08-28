@@ -23,6 +23,11 @@ class SearchPage extends Component {
 
     }
 
+    componentDidMount() {
+        this.searchInput.focus();
+    }
+
+
     // todo: implement debounce to avoid search while typing
     handleChange(e) {
         event.preventDefault();
@@ -64,7 +69,13 @@ class SearchPage extends Component {
                     <Link to='/' className="close-search">Close</Link>
 
                     <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title or author" onChange={this.handleChange}/>
+                        <input
+                            ref={(input) => {
+                                this.searchInput = input;
+                            }}
+                            type="text"
+                            placeholder="Search by title or author"
+                            onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="search-books-results">

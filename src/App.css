@@ -193,20 +193,23 @@ body, .app {
 
 .book-shelf-changer ul{
   list-style: none;
-  width: 200px;
+  width: 128px;
   padding: 0;
-  margin: 40px 0;
   border: solid 1px #ccc;
   background-color: #fff;
   position: relative;
-  z-index: 999;
+  margin: -182px -106px;
+  height: 192px;
 
 }
 
 .book-shelf-changer>div{
   display: none;
 }
-.book-shelf-changer.active div, .book-shelf-changer:active div, .book-shelf-changer:focus div
+.book-shelf-changer.active, .book-shelf-changer:focus {
+
+}
+.book-shelf-changer.active div, .book-shelf-changer:focus div
 /*.book-shelf-changer:hover*/
 {
   display: block;
