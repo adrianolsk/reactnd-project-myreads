@@ -3,6 +3,8 @@ import * as BooksAPI from '../util/BooksAPI';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types'
 import Book from './Book';
+import { debounce } from 'throttle-debounce';
+
 class SearchPage extends Component {
 
     static propTypes = {
@@ -19,6 +21,8 @@ class SearchPage extends Component {
             results: []
         };
 
+
+        this.searchBook = debounce(500, this.searchBook);
         this.handleChange = this.handleChange.bind(this);
 
     }
@@ -28,15 +32,15 @@ class SearchPage extends Component {
     }
 
 
-    // todo: implement debounce to avoid search while typing
-    handleChange(e) {
-        event.preventDefault();
+    searchBook(searchTerm) {
 
-        this.setState({
-            query: e.target.value.trim()
-        });
 
-        if (this.state.query.length > 0) {
+        if (searchTerm.trim().length > 0) {
+
+            this.setState({
+                query: searchTerm.trim()
+            });
+
             BooksAPI.search(this.state.query, 20)
                 .then(response => {
 
@@ -59,7 +63,10 @@ class SearchPage extends Component {
                     this.props.onError("Ops! Something went wrong with your search.");
                 });
         }
-
+    }
+    handleChange(e) {
+        event.preventDefault();
+        this.searchBook(e.target.value);
     }
 
     render() {

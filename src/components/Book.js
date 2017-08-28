@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import BookShelfChanger from './BookShelfChanger';
+import BookshelfChanger from './BookshelfChanger';
 class Book extends Component {
 
     static propTypes = {
@@ -54,7 +54,7 @@ class Book extends Component {
                             height: 192,
                             backgroundImage: `url(${imageLinks.thumbnail})`
                         }}/>
-                        <BookShelfChanger
+                        <BookshelfChanger
                             book={this.props.book}
                             onUpdateBook={this.onUpdateBook}
                             shelf={shelf}/>
