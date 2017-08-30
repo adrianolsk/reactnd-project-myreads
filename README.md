@@ -1,4 +1,4 @@
-This a implementation of the MyReads project for the React Nanodegree
+This is a implementation of the MyReads project for the React Nanodegree
 
 ## Running
 ```
