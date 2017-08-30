@@ -33,7 +33,7 @@ class MyReadsPage extends Component {
                 },
                 {
                     title: 'Read',
-                    placeholder: 'You have\'t read a single book? :(',
+                    placeholder: 'You haven\'t read a single book? :(',
                     shelf: 'read',
                     order: 3,
                     kanbanOrder: 3
