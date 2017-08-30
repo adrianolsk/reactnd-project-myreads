@@ -45,11 +45,10 @@ class BooksApp extends React.Component {
             }
         });
         BooksAPI.update(movedBook, shelf)
-            .then(response => {
+            .then(() => {
                 this.onSuccess(`${movedBook.title} saved successfully` );
             })
-            .catch(err => {
-                console.error('Error while updating book using api', err);
+            .catch(() => {
                 this.onError('There was a problem while updating your book.');
 
                 this.setState(prev => ({
@@ -57,7 +56,6 @@ class BooksApp extends React.Component {
                 }));
 
             });
-
     }
 
 
