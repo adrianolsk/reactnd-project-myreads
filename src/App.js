@@ -45,7 +45,6 @@ class BooksApp extends React.Component {
         });
         BooksAPI.update(book, shelf)
             .then(response => {
-                // Todo: Show success message
                 this.onSuccess('Book updated successfuly');
             })
             .catch(err => {
@@ -104,13 +103,11 @@ class BooksApp extends React.Component {
                          style={{display: this.state.message.show ? 'block' : 'none'}}>
                         <p>{this.state.message.text}</p>
                     </div>
-                ): ''}
+                ) : ''}
 
             </div>
         );
     }
 }
 
-export
-default
-BooksApp
+export default BooksApp;
