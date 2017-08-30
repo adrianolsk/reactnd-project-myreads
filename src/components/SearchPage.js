@@ -52,6 +52,8 @@ class SearchPage extends Component {
                                 break;
                             }
                         }
+
+                        return book;
                     });
 
                     this.setState({
@@ -64,7 +66,7 @@ class SearchPage extends Component {
         }
     }
     handleChange(e) {
-        event.preventDefault();
+        e.preventDefault();
         this.searchBook(e.target.value);
     }
 
@@ -88,6 +90,7 @@ class SearchPage extends Component {
                     <ol className="books-grid">
                         {this.state.results.map(book => (
                             <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
+
                         ))}
                     </ol>
                 </div>

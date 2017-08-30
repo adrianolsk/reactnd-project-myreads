@@ -11,10 +11,6 @@ class Bookshelf extends Component {
         onUpdateBook: PropTypes.func.isRequired
     }
 
-    constructor() {
-        super();
-    }
-
     render() {
 
         let {books, title, placeholder = 'No books'} = this.props;
@@ -24,10 +20,10 @@ class Bookshelf extends Component {
                 <h2 className="bookshelf-title">{title} ({books.length})</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {books.length == 0 ? (<p>{placeholder}</p>) : ''}
+                        {books.length === 0 ? (<p>{placeholder}</p>) : ''}
 
                         {books.map(book => (
-                            <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}></Book>
+                            <Book key={book.id} book={book} onUpdateBook={this.props.onUpdateBook}/>
                         ))}
                     </ol>
                 </div>
