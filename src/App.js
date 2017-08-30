@@ -31,10 +31,11 @@ class BooksApp extends React.Component {
     }
 
     onUpdateBook(book, shelf) {
-        book.shelf = shelf;
+        let movedBook = Object.assign({}, book);
+        movedBook.shelf = shelf;
 
         this.setState(prev => ({
-            books: prev.books.filter((b) => b.id !== book.id).concat([book])
+            books: prev.books.filter((b) => b.id !== book.id).concat([movedBook])
         }));
         this.setState({
             message: {
@@ -43,13 +44,18 @@ class BooksApp extends React.Component {
                 show: true
             }
         });
-        BooksAPI.update(book, shelf)
+        BooksAPI.update(movedBook, shelf)
             .then(response => {
-                this.onSuccess('Book updated successfuly');
+                this.onSuccess(`${movedBook.title} saved successfully` );
             })
             .catch(err => {
-                // Todo: Maybe undo the previous operation on the state
-                this.onError('There was a problem while updating your book');
+                console.error('Error while updating book using api', err);
+                this.onError('There was a problem while updating your book.');
+
+                this.setState(prev => ({
+                    books: prev.books.filter((b) => b.id !== book.id).concat([book])
+                }));
+
             });
 
     }
