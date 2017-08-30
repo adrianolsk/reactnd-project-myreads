@@ -169,6 +169,8 @@ body, .app {
 .book-cover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background: #eee;
+    overflow: hidden;
+    position: relative;
 }
 
 .book-cover-title {
@@ -254,4 +256,17 @@ body, .app {
 .bookshelf:nth-child(odd) {
     background: rgba(0, 0, 0, 0.05);
     border-right:1px solid #dedede
+}
+
+.current-shelf {
+    position: absolute;
+    width: 143px;
+    text-align: center;
+    font-size: 12px;
+    top: 25px;
+    left: -30px;
+    background: rgb(44, 159, 204);
+    color: white;
+    padding: 5px;
+    transform: rotate(-45deg);
 }
