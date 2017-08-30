@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {shelves} from '../util/Constants';
 
 class BookShelfChanger extends Component {
 
@@ -13,12 +14,7 @@ class BookShelfChanger extends Component {
 
         this.state = {
             isOpen: false,
-            options: [
-                {value: 'currentlyReading', text: 'Currently Reading', selected: false},
-                {value: 'wantToRead', text: 'Want to Read', selected: false},
-                {value: 'read', text: 'Read', selected: false},
-                {value: 'none', text: 'None', selected: false}
-            ]
+            options: shelves
         };
 
         this.openMenu = this.openMenu.bind(this);
@@ -27,12 +23,12 @@ class BookShelfChanger extends Component {
 
 
     openMenu() {
-        if(!this.state.isOpen) {
+        if (!this.state.isOpen) {
             this.setState({isOpen: true});
         }
     }
 
-    onSelected(shelf){
+    onSelected(shelf) {
         this.setState({isOpen: false});
         this.props.onUpdateBook(shelf);
     }
@@ -49,7 +45,7 @@ class BookShelfChanger extends Component {
                 {!isOpen ? '' : (
                     <div>
                         <ul>
-                            <li className="title">Move to... </li>
+                            <li className="title">Move to...</li>
                             {options.map(option => (
                                 <li onClick={() => this.onSelected(option.value)}
                                     value={option.value} className={option.value === shelf ? 'selected' : ''}
