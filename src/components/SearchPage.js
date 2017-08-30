@@ -46,12 +46,8 @@ class SearchPage extends Component {
                     let results = response === undefined || response.error || response.length === 0 ? [] : response;
                     results.map((book) => {
 
-                        for (let currentBook of this.props.currentBooks) {
-                            if (currentBook.id === book.id) {
-                                book.shelf = currentBook.shelf;
-                                break;
-                            }
-                        }
+                        let bookInShelf = this.props.currentBooks.find(item => item.id === book.id);
+                        book.shelf = bookInShelf ? bookInShelf.shelf: book.shelf;
 
                         return book;
                     });
